@@ -1,0 +1,29 @@
+@import "src/style/master";
+
+.button:active { background-color: $primary-color-darken; }
+.button {
+  background-color: $primary-color;
+  color: $body-text-color;
+
+  font-family: $body-font;
+  font-size: $body-font-size;
+  
+  padding: $spacing-quantum * 2;
+  padding-left: $spacing-quantum * 3;
+  padding-right: $spacing-quantum * 3;
+  
+  border: none;
+  border-radius: $spacing-quantum * 4;
+
+  transition: background-color 0.25s;
+}
+.button:focus { outline: none; }
+.button:hover { background-color: $primary-color-lighten; }
+
+.button.save { background-color: $pop-color; }
+.button.save:active { background-color: $pop-color-darken; }
+.button.save:hover { background-color: $pop-color-lighten; }
+
+.button.cancel { background-color: $hide-color; }
+.button.cancel:active { background-color: $hide-color-darken; }
+.button.cancel:hover { background-color: $hide-color-lighten; }

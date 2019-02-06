@@ -15,10 +15,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.scss$/,
+        use: [ "style-loader", "css-loader", "sass-loader" ]
       }
     ]
   },
-  resolve: { extensions: ["*", ".js", ".jsx"] },
+  resolve: { extensions: ["*", ".js", ".jsx", ".scss"] },
   output: {
     path: path.resolve(__dirname, "dist/"),
     publicPath: "/dist/",
