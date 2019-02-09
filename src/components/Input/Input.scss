@@ -1,0 +1,11 @@
+@import "src/style/master.scss";
+
+.input {
+  padding: $spacing-quantum * 2;
+
+  font-family: $body-font;
+  font-size: $body-font-size;
+
+  border: none;
+}
+.input:focus { outline: none; }
