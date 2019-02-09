@@ -16,6 +16,7 @@
   border-radius: $spacing-quantum * 4;
 
   transition: background-color 0.25s;
+  transition: color 0.25s;
 }
 .button:focus { outline: none; }
 .button:hover { background-color: $primary-color-lighten; }
@@ -27,3 +28,12 @@
 .button.cancel { background-color: $hide-color; }
 .button.cancel:active { background-color: $hide-color-darken; }
 .button.cancel:hover { background-color: $hide-color-lighten; }
+
+.button.ghost { background-color: transparent; }
+.button.ghost:active { color: $hide-color-darken; }
+.button.ghost:hover { color: $hide-color-lighten; }
+
+.button.square {
+  padding-left: $spacing-quantum * 2;
+  padding-right: $spacing-quantum * 2;
+}
