@@ -1,4 +1,5 @@
 @import "src/style/master";
+$padding: $spacing-quantum * 4;
 
 .modal {
   width: 50vw;
@@ -17,6 +18,36 @@
   position: absolute;
   left: 0;
   top: 0;
-  background-color: black;
-  opacity: 0.75;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.content-wrapper {
+  height: calc(100% - #{padding} - 2em);
+}
+
+.content {
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.content.left { left: $padding; }
+.content.right { right: $padding; }
+.content.center {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  top: $padding / 2;
+  transform: translate(-50%, 0);
+}
+
+.footer {
+  position: absolute;
+  width: calc(100% - #{$padding} * 2);
+  bottom: $padding;
+  left: $padding;
 }

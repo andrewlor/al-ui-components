@@ -12,13 +12,39 @@ $hide-color-darken: darken($hide-color, 5%);
 $hide-color-lighten: lighten($hide-color, 5%);
 
 // Text
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
-$body-font: Ubuntu;
-
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+$body-font: Source Code Pro;
+$font-color: white;
 $body-font-size: 14px;
+
+.text {
+  font-family: $body-font;
+  color: $font-color;
+  margin: 0;
+}
+
+h1 {
+  @extend .text;
+  font-size: 2em;
+}
+
+h2 {
+  @extend .text;
+  font-size: 1.5em;
+}
+
+h3 {
+  @extend .text;
+  font-size: 1em;
+}
+
+p {
+  @extend .text;
+}
 
 // Spacing
 $spacing-quantum: 5px;
+$block-width: 20vw;
 
 // Borders
 $border-radius: 5px;
@@ -26,4 +52,29 @@ $border-radius: 5px;
 // General Selectors
 body {
   background-color: $background-color;
+}
+
+// General Classes
+.fl { float: left; }
+.fr { float: right; }
+.spacing-quantum-square {
+  width: $spacing-quantum;
+  height: $spacing-quantum;
+}
+
+// Containers
+.spaced-vertical > * {
+  margin-bottom: $spacing-quantum * 2;
+}
+
+.scroll-box {
+  overflow-y: scroll;
+}
+.scroll-box::-webkit-scrollbar { width: 0 !important }
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

@@ -4,29 +4,47 @@ import { hot } from 'react-hot-loader'
 import Button from './components/Button'
 import Input from './components/Input'
 import Modal from './components/Modal'
+import Menu from './components/Menu'
+
+import './style/master.scss'
 
 class Demo extends React.Component {
   state = {
-    showModal: false
+    showModal: false,
+    showMenu: false,
   }
 
-  updateStateValue = key => value => this.setState(R.assoc(key, value))
-
-  toggleModal = () => this.setState(state => ({ showModal: R.not(state.showModal) }))
-
-  renderModal = () =>
-    this.state.showModal ? <Modal onClose={this.toggleModal}>
-      <Input placeholder='Email' />
-      <br />
-      <Button text='Normal' onClick={() => alert('Click')} />
-      <Button text='Cancel' type='cancel' />
-      <Button text='Save' type='save' />
-    </Modal> : null
+  toggleState = (key) => () => this.setState(state => ({ [key]: R.not(state[key]) }))
   
   render = () =>
     <div>
-      <Button text='Show Modal' onClick={this.toggleModal} />
-      {this.renderModal()}
+      <Menu
+	visible={this.state.showMenu}
+	toggle={this.toggleState('showMenu')}
+      items={[ {text: 'Dashboard', onClick: () => alert('Test')},
+	       {text: 'Settings', subItems: [{ text: 'Profile' }, { text: 'Configuration' }] },
+		 {text: 'Activity', onClick: () => alert('Test 2')}, ]}
+      />
+      <Modal
+	visible={this.state.showModal}
+	toggle={this.toggleState('showModal')}
+	title='Login'
+	alignContent='center'
+	footer={<>
+	  <Button text='Sign up'/>
+	  <Button text='Login' type='save' className='fr' />
+	</>}
+      >
+	<div className='spaced-vertical'>
+	  <Input placeholder='Email' /><br />
+	  <Input placeholder='Password' type='password' /><br />
+	  <Input placeholder='Age' type='number' /><br />
+	</div>
+      </Modal>
+      <div className='center' style={{ zIndex: -1 }}>
+	<Button text='Show Modal' onClick={this.toggleState('showModal')} />
+	<Button text='Show Menu' onClick={this.toggleState('showMenu')} />
+      </div>
     </div>
 }
 

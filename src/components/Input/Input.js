@@ -20,7 +20,7 @@ export default class Input extends React.PureComponent {
 }
 
 Input.propTypes = {
-  type: PropTypes.oneOf(['text', 'textarea', 'number']),
+  type: PropTypes.oneOf(['text', 'textarea', 'number', 'password']),
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,

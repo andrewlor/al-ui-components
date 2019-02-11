@@ -15,8 +15,7 @@ export default class Button extends React.PureComponent {
 		      <IconContext.Provider value={{ size: '2em' }}>
 			{this.props.icon}
 		      </IconContext.Provider>
-		      
-  
+
   render = () =>
     <button
       onClick={this.props.onClick}
