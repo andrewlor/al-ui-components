@@ -36,19 +36,19 @@
 }
 
 .expand-vertical-enter {
-  margin-top: -100%;
+  margin-left: -100%;
 }
 
 .expand-vertical-enter.expand-vertical-enter-active {
-  margin-top: 0;
-  transition: margin-top 500ms ease;
+  margin-left: 0;
+  transition: margin-left 500ms ease;
 }
 
 .expand-vertical-leave {
-  margin-top: 0;
+  margin-left: 0;
 }
 
 .expand-vertical-leave.expand-vertical-leave-active {
-  margin-top: -55%;
-  transition: margin-top 500ms ease;
+  margin-left: -100%;
+  transition: margin-left 500ms ease;
 }

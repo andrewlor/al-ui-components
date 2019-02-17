@@ -16,7 +16,10 @@ export default class Menu extends React.PureComponent {
       key={index}
       text={item.text}
       subItems={item.subItems}
-      onClick={R.isNil(item.subItems) ? item.onClick : R.F}
+      onClick={R.isNil(item.subItems) ? () => {
+	  item.onClick();
+	  this.props.toggle();
+      } : R.F}
       first={R.equals(index, 0)}
       last={R.equals(index, this.props.items.length - 1)}
     />

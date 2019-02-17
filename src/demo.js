@@ -22,7 +22,11 @@ class Demo extends React.Component {
 	visible={this.state.showMenu}
 	toggle={this.toggleState('showMenu')}
       items={[ {text: 'Dashboard', onClick: () => alert('Test')},
-	       {text: 'Settings', subItems: [{ text: 'Profile' }, { text: 'Configuration' }] },
+	       {text: 'Settings', subItems: [{ text: 'Profile' },
+					     {
+					       text: 'Configuration',
+					       subItems: [{ text: 'Payments'}, {text: 'Invoices'}]
+					     }] },
 		 {text: 'Activity', onClick: () => alert('Test 2')}, ]}
       />
       <Modal

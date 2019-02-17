@@ -37,7 +37,7 @@ export default class MenuItem extends React.PureComponent {
 	className={this.computeClassName()}
       >
 	<div className='text-box'>
-	  {Array.from(Array(this.props.indent * 5).keys())
+	  {Array.from(Array(this.props.indent * 3).keys())
 		.map(x => <div key={x} className='spacing-quantum-square'/>)}
 	  {this.hasSubItems() ?
 	   (this.state.open ? <IoIosArrowDown /> : <IoIosArrowForward />) : null}
