@@ -10,6 +10,7 @@ $padding: $spacing-quantum * 4;
   margin-left: -25vw;
   margin-top: -25vh;
   background-color: $background-color;
+  border-radius: $spacing-quantum * 2;
 }
 
 .outer-modal {

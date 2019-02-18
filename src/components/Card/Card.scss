@@ -1,0 +1,9 @@
+@import "src/style/master";
+
+.card {
+  background-color: $background-color-lighten;
+  padding: $spacing-quantum * 5;
+  border-radius: $spacing-quantum * 2;
+  box-shadow: 0px 0px $spacing-quantum * 2 $spacing-quantum $background-color-darken;
+  margin: $spacing-quantum * 2;
+}

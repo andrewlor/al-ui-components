@@ -3,6 +3,8 @@ $primary-color: #800000;
 $primary-color-darken: darken($primary-color, 5%);
 $primary-color-lighten: lighten($primary-color, 5%);
 $background-color: #333333;
+$background-color-darken: darken($background-color, 5%);
+$background-color-lighten: lighten($background-color, 5%);
 $body-text-color: white;
 $pop-color: #0061d1;
 $pop-color-darken: darken($pop-color, 5%);
