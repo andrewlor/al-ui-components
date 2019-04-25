@@ -1,5 +1,4 @@
 const path = require("path");
-const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.js",
@@ -24,15 +23,10 @@ module.exports = {
   },
   resolve: { extensions: ["*", ".js", ".jsx", ".scss"] },
   output: {
-    path: path.resolve(__dirname, "dist/"),
-    publicPath: "/dist/",
-    filename: "bundle.js"
+    path: path.resolve(__dirname, ""),
+    filename: "bundle.js",
+    library: 'al-ui-components',
+    libraryTarget: 'umd',
   },
-  devServer: {
-    contentBase: path.join(__dirname, "public/"),
-    port: 3000,
-    publicPath: "http://localhost:3000/dist/",
-    hotOnly: true
-  },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  watch: true
 };

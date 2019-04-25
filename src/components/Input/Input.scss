@@ -1,12 +1,22 @@
-@import "src/style/master.scss";
+@import "../../style/master.scss";
 
-.input {
-  padding: $spacing-quantum * 2;
-  width: $block-width;
+.input-wrapper {
+    .label {
+        @extend .text;
+        margin-bottom: $spacing-quantum;
+    }
 
-  font-family: $body-font;
-  font-size: $body-font-size;
+    .input {
+        padding: $spacing-quantum * 2;
+        width: $block-width;
 
-  border: none;
+        font-family: $body-font;
+        font-size: $body-font-size;
+
+        border: none;
+    }
+
+    .input:focus {
+        outline: none;
+    }
 }
-.input:focus { outline: none; }

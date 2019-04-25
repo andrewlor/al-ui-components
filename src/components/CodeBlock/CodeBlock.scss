@@ -1,0 +1,8 @@
+@import "../../style/master.scss";
+
+.code-block {
+    @extend .text;
+    background-color: $background-color-darken;
+    border-radius: $spacing-quantum;
+    padding: $spacing-quantum * 2;
+}
