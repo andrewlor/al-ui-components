@@ -1,0 +1,21 @@
+.vertex-container {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  
+  .vertex {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .label {
+      color: white;
+    }
+  }
+}

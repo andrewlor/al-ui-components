@@ -1,0 +1,40 @@
+@import '../../style/master.scss';
+
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+
+    .label {
+        @extend .text;
+        margin-bottom: $spacing-quantum;
+    }
+
+    .toggle {
+        height: $spacing-quantum * 8;
+        width: $spacing-quantum * 16;
+        border-radius: $spacing-quantum * 4;
+        background-color: $pop-color;
+        display: flex;
+        flex-direction: column;
+        margin: 0 ($spacing-quantum * 2);
+
+        &.off {
+            background-color: $hide-color;
+        }
+
+        .ball {
+            height: $spacing-quantum * 8;
+            width: $spacing-quantum * 8;
+            border-radius: $spacing-quantum * 4;
+            background-color: white;
+
+            &.left {
+                align-self: flex-start;
+            }
+
+            &.right {
+                align-self: flex-end;
+            }
+        }
+    }
+}

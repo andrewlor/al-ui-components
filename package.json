@@ -2,7 +2,7 @@
   "name": "al-ui-components",
   "version": "1.0.0",
   "description": "Andrew Lor's library of common UI components.",
-  "main": "bundle.js",
+  "main": "dist/bundle.js",
   "scripts": {
     "dev": "webpack --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"

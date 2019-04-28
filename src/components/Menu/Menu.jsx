@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import * as R from 'ramda'
-import Button from '../Button'
+import Button from '../Button/Button'
 import { IoIosClose } from 'react-icons/io'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import MenuItem from './MenuItem'

@@ -1,0 +1,48 @@
+.graph {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    position: relative;
+    z-index: 100;
+
+    .row {
+        display: flex;
+        flex: 1;
+        z-index: 2;
+    }
+
+    .canvas {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        stroke: grey;
+        stroke-width: 2px;
+        fill: none;
+
+        .arrow {
+            fill: grey;
+            stroke: grey;
+            stroke-width: 1px;
+        }
+
+        .arrow-highlighted {
+            fill: red;
+            stroke: red;
+            stroke-width: 1px;
+        }
+
+        .highlighted {
+            stroke: red;
+        }
+    }
+}
+
+#redrawing {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}

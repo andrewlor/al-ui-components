@@ -23,7 +23,7 @@ module.exports = {
   },
   resolve: { extensions: ["*", ".js", ".jsx", ".scss"] },
   output: {
-    path: path.resolve(__dirname, ""),
+    path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
     library: 'al-ui-components',
     libraryTarget: 'umd',
