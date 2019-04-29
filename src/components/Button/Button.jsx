@@ -7,26 +7,30 @@ import './Button.scss'
 
 export default class Button extends React.PureComponent {
 
-  computeClassNames = () =>
-    R.join(' ', [this.props.type, this.props.className, 'button'])
+    computeClassNames = () =>
+        R.join(' ', [ this.props.type, this.props.className,
+            this.props.disabled ? 'disabled' : '', 'button' ])
 
-  renderContent = () =>
-    this.props.text ? this.props.text :
-		      <IconContext.Provider value={{ size: '2em' }}>
-			{this.props.icon}
-		      </IconContext.Provider>
+    renderContent = () =>
+        this.props.text ? this.props.text :
+            <IconContext.Provider value={{ size: '2em' }}>
+                {this.props.icon}
+            </IconContext.Provider>
 
-  render = () =>
-    <button
-      onClick={this.props.onClick}
-      className={this.computeClassNames()}
-    >
-      {this.renderContent()}
-    </button>
+    onClick = () => this.props.disabled ? null : this.props.onClick()
+
+    render = () =>
+        <button
+            onClick={this.onClick}
+            className={this.computeClassNames()}
+        >
+            {this.renderContent()}
+        </button>
 }
 
 Button.propTypes = {
-  type: PropTypes.oneOf(['save', 'cancel', 'ghost']),
-  text: PropTypes.string,
-  icon: PropTypes.node,
+    type: PropTypes.oneOf([ 'save', 'ghost' ]),
+    text: PropTypes.string,
+    icon: PropTypes.node,
+    disabled: PropTypes.bool,
 }

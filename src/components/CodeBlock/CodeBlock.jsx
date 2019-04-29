@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import './CodeBlock.scss'
 
-const CodeBlock = React.memo(({code}) =>
+const CodeBlock = React.memo(({ code }) =>
     <div className='code-block'>
         {
             R.pipe(

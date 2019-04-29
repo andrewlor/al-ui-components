@@ -1,54 +1,54 @@
 .fade-enter {
-  opacity: 0.01
+    opacity: 0.01
 }
 
 .fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 200ms ease-in;
+    opacity: 1;
+    transition: opacity 200ms ease-in;
 }
 
 .fade-leave {
-  opacity: 1;
+    opacity: 1;
 }
 
 .fade-leave.fade-leave-active {
-  opacity: 0.01;
-  transition: opacity 200ms ease-in;
+    opacity: 0.01;
+    transition: opacity 200ms ease-in;
 }
 
 .left-swipe-enter {
-  margin-left: -100%;
+    margin-left: -100%;
 }
 
 .left-swipe-enter.left-swipe-enter-active {
-  margin-left: 0;
-  transition: margin-left 300ms ease;
+    margin-left: 0;
+    transition: margin-left 300ms ease;
 }
 
 .left-swipe-leave {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 .left-swipe-leave.left-swipe-leave-active {
-  // why is this 25 and not 100?
-  margin-left: -25%;
-  transition: margin-left 300ms ease;
+    // why is this 25 and not 100?
+    margin-left: -25%;
+    transition: margin-left 300ms ease;
 }
 
 .expand-vertical-enter {
-  margin-left: -100%;
+    margin-left: -100%;
 }
 
 .expand-vertical-enter.expand-vertical-enter-active {
-  margin-left: 0;
-  transition: margin-left 500ms ease;
+    margin-left: 0;
+    transition: margin-left 500ms ease;
 }
 
 .expand-vertical-leave {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 .expand-vertical-leave.expand-vertical-leave-active {
-  margin-left: -100%;
-  transition: margin-left 500ms ease;
+    margin-left: -100%;
+    transition: margin-left 500ms ease;
 }

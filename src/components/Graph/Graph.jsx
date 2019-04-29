@@ -2,6 +2,7 @@ import React from 'react'
 import * as R from 'ramda'
 import PropTypes from 'prop-types'
 import Vertex from './Vertex'
+import debounce from 'lodash.debounce'
 import {
     sequence,
     drawEdge,
@@ -12,46 +13,43 @@ import {
 import './Graph.scss'
 
 class Graph extends React.PureComponent {
-    constructor(props) {
-        super(props)
-
-        // listen to window resize event
-        window.onresize = () => {
-            if (this.state.redrawingTimeout)
-                clearTimeout(this.state.redrawingTimeout)
-            this.setState({
-                isRedrawing: true,
-                redrawingTimeout: setTimeout(() => {
-                    this.setState({isRedrawing: false})
-                    this.drawEdges()
-                }, 100)
-            })
-        }
-
-        let adjList = R.ifElse(
-            R.equals(true),
-            () => randomAdjList(props.n, props.density),
-            () => props.adjList
-        )(props.random)
-
-        // create a ref for each vertex
-        let vertexRefs = []
-        for (let i = 0; i < adjList.size; ++i)
-            vertexRefs.push(React.createRef())
-
-        this.vertexRefs = vertexRefs
-
-        this.state = {
-            adjList: adjList,
-            n: adjList.size,
-            sideLen: Math.ceil(Math.sqrt(adjList.size)),
-            isRedrawing: false,
-        }
+    state = {
+        adjList: [],
+        n: 0,
+        sideLen: 0,
     }
 
     canvasRef = React.createRef()
 
-    componentDidMount = () => this.drawEdges()
+    static getDerivedStateFromProps = ({ n, random, adjList, density }) =>
+        random
+            ? ({
+                n,
+                sideLen: Math.ceil(Math.sqrt(n)),
+                adjList: randomAdjList(n, density),
+                vertexRefs: R.map(
+                    React.createRef,
+                    sequence(n)
+                )
+            }) : ({
+                n: adjList.length,
+                sideLen: Math.ceil(Math.sqrt(adjList.length)),
+                adjList,
+                vertexRefs: R.map(
+                    React.createRef,
+                    sequence(adjList.length)
+                )
+            })
+
+    componentDidMount = () => {
+        this.drawEdges()
+        window.onresize = () =>
+            this.setState({ isRedrawing: true }, this.drawEdgesDebounced)
+    }
+
+    componentDidUpdate = (prevProps) =>
+        R.not(R.equals(prevProps, this.props))
+            ? this.drawEdges() : null
 
     // Helpers
     vertexNumber = (row, col) => row * this.state.sideLen + col
@@ -60,15 +58,18 @@ class Graph extends React.PureComponent {
 
     // Drawers
     drawEdge = (u, v, canvasOffset, highlighted) =>
-        drawEdge(this.vertexRefs.get(u), this.vertexRefs.get(v),
+        drawEdge(this.state.vertexRefs[u], this.state.vertexRefs[v],
             this.canvasRef, canvasOffset, highlighted)
 
-    drawEdges = () => {
-        this.canvasRef.current.innerHTML = ''
-        const canvasOffset = this.getCanvasOffset()
-        this.state.adjList.forEach((neighbours, u) =>
-            neighbours.forEach(v => this.drawEdge(u, v, canvasOffset)))
-    }
+    drawEdges = () =>
+        this.setState({ isRedrawing: false }, () => {
+            this.canvasRef.current.innerHTML = ''
+            const canvasOffset = this.getCanvasOffset()
+            this.state.adjList.forEach((neighbours, u) =>
+                neighbours.forEach(v => this.drawEdge(u, v, canvasOffset)))
+        })
+
+    drawEdgesDebounced = debounce(() => this.drawEdges(), 100)
 
     getCanvasOffset = () =>
         R.applySpec({
@@ -79,7 +80,7 @@ class Graph extends React.PureComponent {
     BFS = s => {
         this.drawEdges()
         const canvasOffset = this.getCanvasOffset()
-        BFS((u, v) => this.drawEdge(u, v, canvasOffset, true), this.state.adjList, s)
+        //BFS((u, v) => this.drawEdge(u, v, canvasOffset, true), this.state.adjList, s)
     }
 
     // Renderers
@@ -90,9 +91,9 @@ class Graph extends React.PureComponent {
                 <Vertex
                     key={row + '' + col}
                     label={this.vertexNumber(row, col)}
-                    handleClick={() => this.BFS(this.vertexNumber(row, col))}
-                    reference={this.vertexRefs.get(this.vertexNumber(row, col))}
-                    neighbours={this.state.adjList.get(this.vertexNumber(row, col))}
+                    //handleClick={() => this.BFS(this.vertexNumber(row, col))}
+                    reference={this.state.vertexRefs[this.vertexNumber(row, col)]}
+                    neighbours={this.state.adjList[this.vertexNumber(row, col)]}
                 />,
             R.always(null)
         )(this.state.n)

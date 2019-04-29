@@ -1,13 +1,14 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import * as R from 'ramda'
+import { classNames } from '../../common/utils'
 
 import './Input.scss'
 
 export default class Input extends Component {
 
     computeClassNames = () =>
-        R.join(' ', ['input'])
+        R.join(' ', [ 'input' ])
 
     handleChange = e =>
         R.pipe(
@@ -18,16 +19,26 @@ export default class Input extends Component {
             this.props.onChange
         )(e.target.value)
 
+    isValid = () =>
+        this.props.isValid(this.props.value)
+
+    invalidMsg = () =>
+        R.isEmpty(this.props.invalidMsg) ? '[Invalid]' : `[${this.props.invalidMsg}]`
+
     render = () =>
         <div className='input-wrapper'>
-            <p className='label'>{this.props.label}</p>
+            <p
+                className={classNames([
+                    'label',
+                    [ R.not(this.isValid()), 'invalid' ]
+                ])}
+            >{`${this.props.label} ${this.isValid() ? '' : this.invalidMsg()}`}</p>
             {
                 this.props.type === 'textarea'
                     ? <textarea
                         value={this.props.value}
                         onChange={this.handleChange}
                         className={this.computeClassNames()}
-                        type={this.props.type}
                         onBlur={this.props.onBlur}
                         onFocus={this.props.onFocus}
                         placeholder={this.props.label}
@@ -42,18 +53,23 @@ export default class Input extends Component {
                         onBlur={this.props.onBlur}
                         onFocus={this.props.onFocus}
                         placeholder={this.props.label}
+                        step={this.props.step}
+                        min={this.props.min}
+                        max={this.props.max}
                     />
             }
         </div>
 }
 
 Input.propTypes = {
-    type: PropTypes.oneOf(['text', 'textarea', 'number', 'password']),
+    type: PropTypes.oneOf([ 'text', 'textarea', 'number', 'password' ]),
     onChange: PropTypes.func,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     label: PropTypes.string,
+    isValid: PropTypes.func,
+    invalidMsg: PropTypes.string,
 }
 
 Input.defaultProps = {
@@ -63,4 +79,6 @@ Input.defaultProps = {
     onBlur: R.F,
     onFocus: R.F,
     label: '',
+    isValid: R.T,
+    invalidMsg: '',
 }

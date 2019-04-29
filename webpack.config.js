@@ -26,7 +26,6 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
     library: 'al-ui-components',
-    libraryTarget: 'umd',
-  },
-  watch: true
+    libraryTarget: 'umd'
+  }
 };

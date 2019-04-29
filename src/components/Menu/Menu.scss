@@ -1,40 +1,40 @@
 @import 'src/style/master';
 
 .menu {
-  width: $block-width;
-  height: 100vh;
-  background-color: $primary-color;
-  position: absolute;
-  left: 0;
-  top: 0;
+    width: $block-width;
+    height: 100vh;
+    background-color: $primary-color;
+    position: absolute;
+    left: 0;
+    top: 0;
 
-  .scroll-box {
-    height: calc(100% - #{$spacing-quantum} * 4 - 2em);
-  }
-
-  .item {
-    padding: $spacing-quantum * 3;
-    //border-top: 1px solid white;
-    
-    .text-box {
-      display: flex;
-      align-items: center;
-      
-      svg {
-	color: white;
-	padding: $spacing-quantum;
-	padding-left: 0;
-	margin-left: -1 * $spacing-quantum;
-      }
+    .scroll-box {
+        height: calc(100% - #{$spacing-quantum} * 4 - 2em);
     }
-  }
 
-  .item:hover {
-    background-color: $primary-color-lighten;
-  }
+    .item {
+        padding: $spacing-quantum * 3;
+        //border-top: 1px solid white;
 
-  .item.first {
-    //border-bottom: 1px solid white;
-    border-top: none;
-  }
+        .text-box {
+            display: flex;
+            align-items: center;
+
+            svg {
+                color: white;
+                padding: $spacing-quantum;
+                padding-left: 0;
+                margin-left: -1 * $spacing-quantum;
+            }
+        }
+    }
+
+    .item:hover {
+        background-color: $primary-color-lighten;
+    }
+
+    .item.first {
+        //border-bottom: 1px solid white;
+        border-top: none;
+    }
 }

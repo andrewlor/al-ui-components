@@ -4,6 +4,10 @@
     .label {
         @extend .text;
         margin-bottom: $spacing-quantum;
+
+        &.invalid {
+            color: $error-color;
+        }
     }
 
     .input {

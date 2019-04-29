@@ -1,21 +1,39 @@
 import * as R from 'ramda'
 
+export const classNames =
+    R.pipe(
+        R.map(
+            R.ifElse(
+                R.is(Array),
+                ([bool, value]) => bool ? value : '',
+                R.identity
+            )
+        ),
+        R.join(' ')
+    )
+
 export const sequence = n => Array.from(new Array(n), (val, i) => i)
 
 const randN = n => Math.round(Math.random() * (n - 1))
 
 export const randomAdjList = (n, density) => {
-    let adjList = new Array(n)
+    let adjList = Array.from(new Array(n), () => sequence(n))
+    const E = n * (n - 1) // max number of edges
+    const e = Math.round(n * (n - 1) * density) // number of edges based on density
+    const eBar = E - e // number of edges to remove
 
-    for (let i = 0; i < n; ++i) {
-        const neighbours = []
-        let degree = randN(n * density)
-        for (let j = 0; j < degree; ++j)
-            neighbours.push(randN(n - 1))
-        adjList[i] = neighbours
+    let vertices = []
+    sequence(n).forEach(v => vertices.push(v))
+
+    for (let i = 0; i < eBar; ++i) {
+        const idx = randN(vertices.length)
+        const u = vertices[idx]
+        adjList[u].splice(randN(adjList[u].length), 1)
+        if (adjList[u].length === 0)
+            vertices.splice(idx, 1)
     }
 
-    return toImmutableListDeep(adjList)
+    return adjList
 }
 
 export const stringifyAdjList =
@@ -52,7 +70,7 @@ export const isValidAdjList = str =>
 
 export const BFS = (onVisit, adjList, s) => {
     let visited = []
-    for (let i = 0; i < adjList.size; ++i)
+    for (let i = 0; i < adjList.length; ++i)
         visited.push(false)
     visited[s] = true
 
@@ -61,7 +79,7 @@ export const BFS = (onVisit, adjList, s) => {
 
     while (Q.length > 0) {
         let u = Q.shift()
-        adjList.get(u).forEach(v => {
+        adjList[u].forEach(v => {
             if (!visited[v]) {
                 Q.push(v)
                 visited[v] = true
@@ -84,16 +102,16 @@ export const drawEdge = (uRef, vRef, canvasRef, canvasOffset, highlighted) => {
     const y2 = 20 + vRef.current.getBoundingClientRect().y - canvasOffset.y
 
     // curve to avoid overlap
-    let curvePoint1 = [0, 0]
-    let curvePoint2 = [0, 0]
+    let curvePoint1 = [ 0, 0 ]
+    let curvePoint2 = [ 0, 0 ]
     if (x1 === x2)
-        curvePoint1 = [x1 === xMid ? 0 : (x1 < xMid ? -100 : 100), (y2 - y1) / 2]
+        curvePoint1 = [ x1 === xMid ? 0 : (x1 < xMid ? -100 : 100), (y2 - y1) / 2 ]
     if (y1 === y2)
-        curvePoint1 = [(x2 - x1) / 2, y1 === yMid ? 0 : (y1 < yMid ? -100 : 100)]
+        curvePoint1 = [ (x2 - x1) / 2, y1 === yMid ? 0 : (y1 < yMid ? -100 : 100) ]
 
     if (x1 === x2 && y1 === y2) {
-        curvePoint1 = [-100, -100]
-        curvePoint2 = [100, -100]
+        curvePoint1 = [ -100, -100 ]
+        curvePoint2 = [ 100, -100 ]
     } else {
         curvePoint2 = curvePoint1
     }
